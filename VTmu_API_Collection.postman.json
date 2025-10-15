@@ -1,0 +1,273 @@
+{
+  "info": {
+    "name": "VTmu API Collection",
+    "description": "Complete API collection for VTmu Video Downloader - All endpoints with examples",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Video Download APIs",
+      "item": [
+        {
+          "name": "Get Video Info",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://www.tiktok.com/@username/video/1234567890\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/get-info",
+              "host": ["{{base_url}}"],
+              "path": ["api", "get-info"]
+            },
+            "description": "Get video information (title, thumbnail, available formats) without downloading"
+          },
+          "response": []
+        },
+        {
+          "name": "Download Video",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\",\n  \"quality\": \"Best Quality\",\n  \"format_id\": \"bv*+ba/b\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/download",
+              "host": ["{{base_url}}"],
+              "path": ["api", "download"]
+            },
+            "description": "Download video with selected quality"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Supported Sites",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/supported-sites",
+              "host": ["{{base_url}}"],
+              "path": ["api", "supported-sites"]
+            },
+            "description": "Get list of supported platforms"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Maintenance APIs",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health"]
+            },
+            "description": "Check application health and system status"
+          },
+          "response": []
+        },
+        {
+          "name": "View Logs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/logs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "logs"]
+            },
+            "description": "Get last 100 log lines"
+          },
+          "response": []
+        },
+        {
+          "name": "Update yt-dlp",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/api/update-ytdlp",
+              "host": ["{{base_url}}"],
+              "path": ["api", "update-ytdlp"]
+            },
+            "description": "Update yt-dlp to latest version (fixes platform errors)"
+          },
+          "response": []
+        },
+        {
+          "name": "Cleanup Downloads",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/api/cleanup-downloads",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cleanup-downloads"]
+            },
+            "description": "Delete all files in downloads folder to free up space"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CMS APIs",
+      "item": [
+        {
+          "name": "Get Website Config",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/cms/config",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cms", "config"]
+            },
+            "description": "Get current website configuration (branding, theme, features)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Website Config",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branding\": {\n    \"site_name\": \"VTmu Pro\",\n    \"site_tagline\": \"Download Video Premium\"\n  },\n  \"theme\": {\n    \"primary_color\": \"#9C27B0\",\n    \"secondary_color\": \"#FF9800\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cms/config",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cms", "config"]
+            },
+            "description": "Update website branding, theme, and features"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Theme Only",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"theme\": {\n    \"primary_color\": \"#E91E63\",\n    \"secondary_color\": \"#00E5FF\",\n    \"success_color\": \"#76FF03\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cms/theme",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cms", "theme"]
+            },
+            "description": "Quick update theme colors only"
+          },
+          "response": []
+        },
+        {
+          "name": "Get FAQ Content",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/cms/faq",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cms", "faq"]
+            },
+            "description": "Get all FAQ items and categories"
+          },
+          "response": []
+        },
+        {
+          "name": "Update FAQ Content",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"faq_items\": [\n    {\n      \"id\": 1,\n      \"category\": \"general\",\n      \"question\": \"Apa itu VTmu?\",\n      \"answer\": \"VTmu adalah platform download video gratis...\"\n    }\n  ],\n  \"categories\": [\n    {\n      \"id\": \"general\",\n      \"name\": \"Umum\",\n      \"icon\": \"fa-info-circle\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cms/faq",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cms", "faq"]
+            },
+            "description": "Update FAQ items and categories"
+          },
+          "response": []
+        },
+        {
+          "name": "Get How-to Content",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/cms/howto",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cms", "howto"]
+            },
+            "description": "Get tutorial steps and platform guides"
+          },
+          "response": []
+        },
+        {
+          "name": "Update How-to Content",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tutorial_steps\": [\n    {\n      \"step\": 1,\n      \"title\": \"Copy Link Video\",\n      \"description\": \"Buka aplikasi dan copy link\",\n      \"icon\": \"fa-link\",\n      \"tips\": \"Pastikan link valid\"\n    }\n  ],\n  \"platform_guides\": [],\n  \"general_tips\": []\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cms/howto",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cms", "howto"]
+            },
+            "description": "Update tutorial steps and guides"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://your-site.vercel.app",
+      "type": "string"
+    }
+  ]
+}

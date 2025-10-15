@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VTmu - Download video TikTok, YouTube, Instagram tanpa watermark. Gratis, cepat, dan mudah. Support semua platform social media. No watermark video downloader.">
+    <meta name="keywords" content="download tiktok, tiktok downloader, download video tiktok, video downloader, youtube downloader, instagram downloader, download video tanpa watermark, vtmu, multiplatform downloader">
+    <meta name="author" content="VTmu">
+    <meta property="og:title" content="VTmu - Video TikTok Downloader Multiplatform">
+    <meta property="og:description" content="Download video dari TikTok, YouTube, Instagram dan platform lainnya. Gratis, tanpa watermark, tanpa login!">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ff0050">
+    <title>VTmu - Download Video TikTok, YouTube, Instagram Tanpa Watermark</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="nav-icon">📥</span>
+                <span class="nav-brand">VT<span class="highlight">mu</span></span>
+            </div>
+
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Beranda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/how-to-use" class="nav-link">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Cara Pakai</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/faq" class="nav-link">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>FAQ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#platforms" class="nav-link">
+                        <i class="fas fa-globe"></i>
+                        <span>Platform</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">📥</span>
+                <h1>VT<span class="highlight">mu</span></h1>
+            </div>
+            <p class="subtitle">Video TikTok Downloader Multiplatform</p>
+            <p class="tagline">Download video dari TikTok, YouTube, Instagram & lebih banyak lagi!</p>
+        </header>
+
+        <!-- Main Download Section -->
+        <div class="download-section">
+            <h2 class="section-title">🎬 Paste URL Video</h2>
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="videoUrl"
+                    placeholder="https://www.tiktok.com/@username/video/..."
+                    autocomplete="off"
+                >
+                <button id="getInfoBtn" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                    <span>Cari</span>
+                </button>
+            </div>
+
+            <div id="loadingSpinner" class="loading hidden">
+                <i class="fas fa-spinner fa-spin"></i> Memuat informasi video...
+            </div>
+
+            <div id="errorMessage" class="error-message hidden"></div>
+        </div>
+
+        <!-- Video Info Section -->
+        <div id="videoInfo" class="video-info hidden">
+            <div class="video-preview">
+                <img id="videoThumbnail" src="" alt="Thumbnail">
+                <div class="video-details">
+                    <h2 id="videoTitle"></h2>
+                    <div class="video-meta">
+                        <span><i class="fas fa-user"></i> <span id="videoUploader"></span></span>
+                        <span><i class="fas fa-globe"></i> <span id="videoPlatform"></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-options">
+                <div id="formatList" class="format-list"></div>
+            </div>
+        </div>
+
+        <!-- Download Progress -->
+        <div id="downloadProgress" class="download-progress hidden">
+            <div class="progress-content">
+                <div class="rocket-animation">
+                    <div class="rocket">🚀</div>
+                    <div class="clouds">
+                        <span class="cloud">☁️</span>
+                        <span class="cloud">☁️</span>
+                        <span class="cloud">☁️</span>
+                    </div>
+                </div>
+                <h3>Downloading...</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <p class="progress-text">Mohon tunggu...</p>
+            </div>
+            <div class="confetti hidden" id="confetti">
+                <span class="confetti-piece">🎉</span>
+                <span class="confetti-piece">✨</span>
+                <span class="confetti-piece">⭐</span>
+                <span class="confetti-piece">💫</span>
+                <span class="confetti-piece">🎊</span>
+                <span class="confetti-piece">🎉</span>
+                <span class="confetti-piece">✨</span>
+                <span class="confetti-piece">⭐</span>
+            </div>
+        </div>
+
+        <!-- Supported Platforms -->
+        <div class="supported-platforms">
+            <h3 class="platforms-title">Platform yang Didukung</h3>
+            <div class="platform-icons">
+                <div class="platform-item" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </div>
+                <div class="platform-item" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </div>
+                <div class="platform-item" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </div>
+                <div class="platform-item" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </div>
+                <div class="platform-item" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="feature-item">
+                <i class="fas fa-bolt"></i>
+                <h3>Super Cepat</h3>
+                <p>Download dalam hitungan detik</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-check-circle"></i>
+                <h3>Tanpa Watermark</h3>
+                <p>Video bersih tanpa logo</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>All Device</h3>
+                <p>HP, tablet, atau PC</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <h3>100% Gratis</h3>
+                <p>Tanpa biaya & registrasi</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 <strong>VTmu</strong> - Video TikTok Downloader Multiplatform</p>
+        <p class="footer-tagline">Fast, Free, No Watermark</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">
+            Developed by <a href="https://wa.me/6283874636450" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 700; transition: all 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--secondary)'">Andri1404</a>
+        </p>
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

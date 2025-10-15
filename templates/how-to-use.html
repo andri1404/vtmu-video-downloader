@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cara menggunakan VTmu - Panduan lengkap download video TikTok, YouTube, Instagram tanpa watermark">
+    <title>Cara Pakai - VTmu Video Downloader</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .how-to-section {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .how-to-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .steps-container {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .step-item {
+            background: var(--dark-light);
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            display: flex;
+            gap: 20px;
+            align-items: start;
+            transition: all 0.3s;
+        }
+
+        .step-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 80, 0.2);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .step-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .step-content p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .platform-guide {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .platform-card {
+            background: var(--dark-light);
+            padding: 25px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .platform-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 234, 0.2);
+        }
+
+        .platform-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .platform-card h3 i {
+            font-size: 1.8rem;
+        }
+
+        .platform-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .platform-card li {
+            padding: 8px 0;
+            color: var(--text-gray);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .platform-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, rgba(255, 0, 80, 0.1), rgba(0, 242, 234, 0.1));
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            margin-top: 30px;
+        }
+
+        .tips-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .tip-item {
+            background: var(--dark-light);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .tip-item strong {
+            color: var(--success);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .step-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="window.location.href='/'">
+                <span class="nav-icon">📥</span>
+                <span class="nav-brand">VT<span class="highlight">mu</span></span>
+            </div>
+
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Beranda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/how-to-use" class="nav-link active">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Cara Pakai</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/faq" class="nav-link">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>FAQ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#platforms" class="nav-link">
+                        <i class="fas fa-globe"></i>
+                        <span>Platform</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <a href="/" class="back-to-home">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Beranda</span>
+            </a>
+            <div class="logo">
+                <span class="logo-icon">📖</span>
+                <h1>Cara <span class="highlight">Pakai</span></h1>
+            </div>
+            <p class="subtitle">Panduan Lengkap Download Video</p>
+        </header>
+
+        <!-- Main Steps Section -->
+        <div class="how-to-section">
+            <h2>🚀 Langkah-Langkah Download</h2>
+
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Salin Link Video</h3>
+                        <p>Buka aplikasi TikTok, YouTube, Instagram, atau platform lainnya. Pilih video yang ingin didownload, lalu tap tombol <strong>"Bagikan"</strong> atau <strong>"Share"</strong> dan pilih <strong>"Salin Link"</strong> atau <strong>"Copy Link"</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Paste Link di VTmu</h3>
+                        <p>Kembali ke website VTmu, paste (tempelkan) link yang sudah disalin ke kolom input yang tersedia di halaman utama. Pastikan link sudah benar dan lengkap.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Klik Tombol Cari</h3>
+                        <p>Klik tombol <strong>"Cari"</strong> dengan icon 🔍. VTmu akan mengambil informasi video seperti thumbnail, judul, dan pilihan kualitas yang tersedia.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Pilih Kualitas Video</h3>
+                        <p>Setelah informasi video muncul, pilih kualitas yang diinginkan: <strong>Best Quality</strong>, HD 720p, SD 480p, Low 360p, atau <strong>Audio Only (MP3)</strong>. Klik icon download pada kualitas yang dipilih.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Download Selesai!</h3>
+                        <p>Tunggu beberapa saat saat proses download. Video akan otomatis terdownload ke perangkat Anda. Cek folder <strong>Downloads</strong> untuk menemukan file video tanpa watermark!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Specific Guides -->
+        <div class="how-to-section" id="platforms">
+            <h2>📱 Panduan Per Platform</h2>
+
+            <div class="platform-guide">
+                <div class="platform-card">
+                    <h3><i class="fab fa-tiktok" style="color: #ff0050;"></i> TikTok</h3>
+                    <ul>
+                        <li>Support video normal dan slideshow/foto</li>
+                        <li>Download tanpa watermark TikTok</li>
+                        <li>Kualitas HD original</li>
+                        <li>Audio terpisah juga bisa</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h3><i class="fab fa-youtube" style="color: #ff0000;"></i> YouTube</h3>
+                    <ul>
+                        <li>Semua video YouTube didukung</li>
+                        <li>Pilihan kualitas dari 360p hingga 4K</li>
+                        <li>Download audio MP3 tersedia</li>
+                        <li>YouTube Shorts juga support</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h3><i class="fab fa-instagram" style="color: #e1306c;"></i> Instagram</h3>
+                    <ul>
+                        <li>Download Reels, IGTV, dan post video</li>
+                        <li>Support Stories (jika public)</li>
+                        <li>Kualitas HD original</li>
+                        <li>Tanpa watermark Instagram</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h3><i class="fab fa-facebook" style="color: #1877f2;"></i> Facebook</h3>
+                    <ul>
+                        <li>Video dari timeline dan page</li>
+                        <li>Facebook Watch support</li>
+                        <li>Reel Facebook juga bisa</li>
+                        <li>Multi kualitas tersedia</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h3><i class="fab fa-twitter" style="color: #1da1f2;"></i> Twitter/X</h3>
+                    <ul>
+                        <li>Download video dari tweet</li>
+                        <li>GIF dan video pendek support</li>
+                        <li>Kualitas terbaik available</li>
+                        <li>Cepat dan mudah</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h3><i class="fas fa-globe" style="color: var(--secondary);"></i> Platform Lain</h3>
+                    <ul>
+                        <li>Vimeo, Dailymotion, Twitch</li>
+                        <li>Reddit, LinkedIn, Pinterest</li>
+                        <li>Bilibili, VK, dan banyak lagi</li>
+                        <li>Support 1000+ website</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="tips-section">
+            <h3><i class="fas fa-lightbulb"></i> Tips & Trik</h3>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <strong>Koneksi Stabil</strong>
+                    <p>Gunakan koneksi internet yang stabil untuk download lebih cepat dan lancar.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Pilih Kualitas</strong>
+                    <p>Pilih kualitas sesuai kebutuhan. HD untuk kualitas terbaik, SD untuk hemat kuota.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Audio Only</strong>
+                    <p>Jika hanya butuh music/audio, pilih opsi "Audio Only (MP3)" untuk hemat storage.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Link yang Valid</strong>
+                    <p>Pastikan link video benar dan bisa diakses. Link private tidak bisa didownload.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Home -->
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="/" class="btn btn-primary" style="text-decoration: none;">
+                <i class="fas fa-home"></i>
+                <span>Kembali ke Beranda</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 <strong>VTmu</strong> - Video TikTok Downloader Multiplatform</p>
+        <p class="footer-tagline">Fast, Free, No Watermark</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">
+            Developed by <a href="https://wa.me/6283874636450" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 700;">Andri1404</a>
+        </p>
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

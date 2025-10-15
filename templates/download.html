@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VTmu - Download Progress">
+    <title>Downloading - VTmu</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="back-to-home">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Beranda</span>
+            </a>
+            <div class="logo">
+                <span class="logo-icon">📥</span>
+                <h1>VT<span class="highlight">mu</span></h1>
+            </div>
+            <p class="subtitle">Download Progress</p>
+        </header>
+
+        <!-- Download Page Content -->
+        <div class="download-page">
+            <!-- Loading State -->
+            <div id="downloadingState" class="downloading-state">
+                <!-- Character Mascot with Changing Expressions -->
+                <div class="mascot-container">
+                    <div class="mascot" id="mascot">😊</div>
+                    <div class="mascot-speech" id="mascotSpeech">Memulai download...</div>
+                </div>
+
+                <div class="rocket-animation">
+                    <div class="rocket">🚀</div>
+                    <div class="smoke-trail">
+                        <span class="smoke">💨</span>
+                        <span class="smoke">💨</span>
+                    </div>
+                </div>
+
+                <h2 id="downloadTitle">Memproses Download...</h2>
+                <p id="downloadDesc" class="download-desc">Mohon tunggu, video Anda sedang diproses</p>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                    <div class="progress-percentage" id="progressPercentage">0%</div>
+                </div>
+
+                <div class="download-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-video"></i>
+                        <span id="videoTitle">{{ video_title }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <span id="quality">{{ quality }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success State -->
+            <div id="successState" class="success-state hidden">
+                <div class="confetti-success">
+                    <span class="confetti-piece">🎉</span>
+                    <span class="confetti-piece">✨</span>
+                    <span class="confetti-piece">🎊</span>
+                    <span class="confetti-piece">⭐</span>
+                    <span class="confetti-piece">🎉</span>
+                </div>
+
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <h2>Download Berhasil!</h2>
+                <p class="success-message">Video Anda siap didownload</p>
+
+                <div class="video-preview-small">
+                    <i class="fas fa-file-video"></i>
+                    <div class="video-info-small">
+                        <h3 id="successVideoTitle">{{ video_title }}</h3>
+                        <p id="successFileSize">Ukuran: <span id="fileSize">Calculating...</span></p>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="{{ download_url }}" class="btn btn-download-big" download>
+                        <i class="fas fa-download"></i>
+                        <span>Download Video Sekarang</span>
+                    </a>
+
+                    <a href="/" class="btn btn-secondary">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Download Video Lainnya</span>
+                    </a>
+                </div>
+
+                <div class="download-tips">
+                    <h4>💡 Tips:</h4>
+                    <ul>
+                        <li>Video sudah tanpa watermark dan siap digunakan</li>
+                        <li>Cek folder Downloads untuk menemukan file</li>
+                        <li>Simpan video untuk menonton offline kapan saja</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="error-state hidden">
+                <div class="error-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+
+                <h2>Download Gagal</h2>
+                <p class="error-message" id="errorMessage">Terjadi kesalahan saat memproses download</p>
+
+                <div class="action-buttons">
+                    <button onclick="retryDownload()" class="btn btn-primary">
+                        <i class="fas fa-redo"></i>
+                        <span>Coba Lagi</span>
+                    </button>
+
+                    <a href="/" class="btn btn-secondary">
+                        <i class="fas fa-home"></i>
+                        <span>Kembali ke Beranda</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 <strong>VTmu</strong> - Video TikTok Downloader Multiplatform</p>
+        <p class="footer-tagline">Fast, Free, No Watermark</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">
+            Developed by <a href="https://wa.me/6283874636450" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 700; transition: all 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--secondary)'">Andri1404</a>
+        </p>
+    </footer>
+
+    <script>
+        // Get data from sessionStorage
+        const downloadDataStr = sessionStorage.getItem('downloadData');
+        let downloadData = null;
+
+        if (downloadDataStr) {
+            downloadData = JSON.parse(downloadDataStr);
+        }
+
+        const videoUrl = downloadData?.url;
+        const quality = downloadData?.quality;
+        const formatId = downloadData?.format_id;
+        const videoTitleData = downloadData?.video_title || 'Video';
+        const thumbnailData = downloadData?.thumbnail || '';
+
+        let downloadAttempts = 0;
+        const maxAttempts = 3;
+
+        // Update display with video info
+        document.getElementById('videoTitle').textContent = videoTitleData;
+        document.getElementById('quality').textContent = quality || 'Best Quality';
+        document.getElementById('successVideoTitle').textContent = videoTitleData;
+
+        // Auto start download
+        window.addEventListener('load', () => {
+            if (videoUrl && quality && formatId) {
+                startDownload();
+            } else {
+                showError('Data download tidak ditemukan. Silakan kembali ke beranda dan pilih video lagi.');
+            }
+        });
+
+        async function startDownload() {
+            const downloadTitle = document.getElementById('downloadTitle');
+            const downloadDesc = document.getElementById('downloadDesc');
+            const mascot = document.getElementById('mascot');
+            const mascotSpeech = document.getElementById('mascotSpeech');
+            const progressPercentage = document.getElementById('progressPercentage');
+
+            // Mascot expressions and messages
+            const mascotStages = [
+                { emoji: '😊', speech: 'Memulai download...', percent: 0 },
+                { emoji: '😃', speech: 'Mengambil video...', percent: 25 },
+                { emoji: '🤩', speech: 'Hampir selesai...', percent: 50 },
+                { emoji: '🥳', speech: 'Finalisasi...', percent: 75 },
+                { emoji: '🎉', speech: 'Sukses!', percent: 100 }
+            ];
+
+            const messages = [
+                { title: 'Menghubungi Server...', desc: 'Memulai koneksi' },
+                { title: 'Mengambil Video...', desc: 'Memproses permintaan download' },
+                { title: 'Mengoptimalkan Kualitas...', desc: 'Menyiapkan video terbaik untuk Anda' },
+                { title: 'Hampir Selesai...', desc: 'Finishing touches' }
+            ];
+
+            let messageIndex = 0;
+            let currentProgress = 0;
+
+            // Animate progress percentage
+            const progressInterval = setInterval(() => {
+                if (currentProgress < 95) {
+                    currentProgress += Math.random() * 5;
+                    if (currentProgress > 95) currentProgress = 95;
+                    progressPercentage.textContent = Math.round(currentProgress) + '%';
+
+                    // Update mascot based on progress
+                    const stage = mascotStages.find((s, i) => {
+                        const nextStage = mascotStages[i + 1];
+                        return currentProgress >= s.percent && (!nextStage || currentProgress < nextStage.percent);
+                    });
+                    if (stage) {
+                        mascot.textContent = stage.emoji;
+                        mascotSpeech.textContent = stage.speech;
+                    }
+                }
+            }, 300);
+
+            const messageInterval = setInterval(() => {
+                if (messageIndex < messages.length) {
+                    downloadTitle.textContent = messages[messageIndex].title;
+                    downloadDesc.textContent = messages[messageIndex].desc;
+                    messageIndex++;
+                }
+            }, 1500);
+
+            try {
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        url: videoUrl,
+                        quality: quality,
+                        format_id: formatId
+                    }),
+                });
+
+                const data = await response.json();
+                clearInterval(messageInterval);
+                clearInterval(progressInterval);
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Gagal mendownload video');
+                }
+
+                // Complete progress animation
+                currentProgress = 100;
+                progressPercentage.textContent = '100%';
+                mascot.textContent = '🎉';
+                mascotSpeech.textContent = 'Download Selesai! 🎊';
+
+                showSuccess(data);
+            } catch (error) {
+                clearInterval(messageInterval);
+                clearInterval(progressInterval);
+                showError(error.message);
+            }
+        }
+
+        function showSuccess(data) {
+            document.getElementById('downloadingState').classList.add('hidden');
+            document.getElementById('successState').classList.remove('hidden');
+
+            // Update download link
+            const downloadBtn = document.querySelector('.btn-download-big');
+            downloadBtn.href = data.download_url;
+
+            // Update file size if available
+            if (data.filesize) {
+                document.getElementById('fileSize').textContent = formatFileSize(data.filesize);
+            }
+
+            // Auto trigger download
+            setTimeout(() => {
+                window.location.href = data.download_url;
+            }, 500);
+        }
+
+        function showError(message) {
+            document.getElementById('downloadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        function retryDownload() {
+            downloadAttempts++;
+            if (downloadAttempts >= maxAttempts) {
+                showError('Terlalu banyak percobaan. Silakan kembali ke beranda dan coba lagi.');
+                return;
+            }
+
+            document.getElementById('errorState').classList.add('hidden');
+            document.getElementById('downloadingState').classList.remove('hidden');
+            startDownload();
+        }
+
+        function formatFileSize(bytes) {
+            if (!bytes) return 'Unknown';
+            if (bytes >= 1073741824) {
+                return (bytes / 1073741824).toFixed(2) + ' GB';
+            }
+            if (bytes >= 1048576) {
+                return (bytes / 1048576).toFixed(2) + ' MB';
+            }
+            if (bytes >= 1024) {
+                return (bytes / 1024).toFixed(2) + ' KB';
+            }
+            return bytes + ' B';
+        }
+    </script>
+</body>
+</html>

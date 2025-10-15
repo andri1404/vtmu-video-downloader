@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FAQ VTmu - Pertanyaan umum seputar download video TikTok, YouTube, Instagram tanpa watermark">
+    <title>FAQ - VTmu Video Downloader</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .faq-section {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .faq-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: var(--dark-light);
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(255, 0, 80, 0.2);
+        }
+
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 0, 80, 0.05);
+        }
+
+        .faq-question h3 {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-question h3 i {
+            color: var(--secondary);
+            font-size: 1.4rem;
+        }
+
+        .faq-toggle {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 25px 25px 25px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .faq-answer-content strong {
+            color: var(--success);
+        }
+
+        .faq-answer-content ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .faq-answer-content li {
+            margin: 8px 0;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0, 242, 234, 0.2);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quick-link-card {
+            background: var(--dark-light);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .quick-link-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 242, 234, 0.2);
+        }
+
+        .quick-link-card i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .quick-link-card h4 {
+            font-size: 1rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+
+            .faq-toggle {
+                width: 30px;
+                height: 30px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="window.location.href='/'">
+                <span class="nav-icon">📥</span>
+                <span class="nav-brand">VT<span class="highlight">mu</span></span>
+            </div>
+
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Beranda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/how-to-use" class="nav-link">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Cara Pakai</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/faq" class="nav-link active">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>FAQ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#platforms" class="nav-link">
+                        <i class="fas fa-globe"></i>
+                        <span>Platform</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <a href="/" class="back-to-home">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Beranda</span>
+            </a>
+            <div class="logo">
+                <span class="logo-icon">💡</span>
+                <h1>Frequently Asked <span class="highlight">Questions</span></h1>
+            </div>
+            <p class="subtitle">Pertanyaan yang Sering Ditanyakan</p>
+        </header>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <div class="quick-link-card" onclick="scrollToCategory('general')">
+                <i class="fas fa-info-circle"></i>
+                <h4>Umum</h4>
+            </div>
+            <div class="quick-link-card" onclick="scrollToCategory('download')">
+                <i class="fas fa-download"></i>
+                <h4>Download</h4>
+            </div>
+            <div class="quick-link-card" onclick="scrollToCategory('quality')">
+                <i class="fas fa-star"></i>
+                <h4>Kualitas</h4>
+            </div>
+            <div class="quick-link-card" onclick="scrollToCategory('technical')">
+                <i class="fas fa-cog"></i>
+                <h4>Teknis</h4>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>❓ Pertanyaan & Jawaban</h2>
+
+            <div class="faq-container">
+                <!-- General Questions -->
+                <div class="faq-item" id="general">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-question-circle"></i>
+                            Apa itu VTmu?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">UMUM</span>
+                            <p><strong>VTmu</strong> adalah website downloader video multiplatform yang memungkinkan Anda download video dari TikTok, YouTube, Instagram, Facebook, Twitter, dan 1000+ platform lainnya secara <strong>GRATIS</strong> tanpa watermark.</p>
+                            <p>VTmu dirancang untuk memberikan pengalaman download yang cepat, mudah, dan tanpa ribet!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-money-bill-wave"></i>
+                            Apakah VTmu gratis?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">UMUM</span>
+                            <p><strong>100% GRATIS!</strong> VTmu tidak mengenakan biaya apapun. Tidak perlu registrasi, tidak perlu login, tidak ada batasan download, dan tidak ada biaya tersembunyi.</p>
+                            <p>Gunakan sebanyak yang Anda mau, kapan saja!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-globe"></i>
+                            Platform apa saja yang didukung?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">UMUM</span>
+                            <p>VTmu mendukung <strong>1000+ platform</strong>, termasuk:</p>
+                            <ul>
+                                <li><strong>TikTok</strong> - Video & slideshow/foto</li>
+                                <li><strong>YouTube</strong> - Video, Shorts, Live</li>
+                                <li><strong>Instagram</strong> - Reels, IGTV, Video Post</li>
+                                <li><strong>Facebook</strong> - Video, Reel, Watch</li>
+                                <li><strong>Twitter/X</strong> - Video dari tweet</li>
+                                <li><strong>Dan banyak lagi:</strong> Vimeo, Dailymotion, Reddit, Twitch, Bilibili, VK, Pinterest, LinkedIn, dll.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download Questions -->
+                <div class="faq-item" id="download">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-download"></i>
+                            Bagaimana cara download video?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">DOWNLOAD</span>
+                            <p>Sangat mudah! Ikuti 3 langkah ini:</p>
+                            <ul>
+                                <li><strong>1.</strong> Salin link video dari aplikasi (TikTok, YouTube, dll)</li>
+                                <li><strong>2.</strong> Paste link di VTmu dan klik "Cari"</li>
+                                <li><strong>3.</strong> Pilih kualitas dan klik Download!</li>
+                            </ul>
+                            <p>Video akan otomatis terdownload ke folder Downloads Anda.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-water"></i>
+                            Apakah video ada watermark?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">DOWNLOAD</span>
+                            <p><strong>TIDAK ADA WATERMARK!</strong> Video yang didownload dari VTmu 100% bersih tanpa watermark TikTok, Instagram, atau platform lainnya.</p>
+                            <p>Anda akan mendapatkan video <strong>original</strong> dalam kualitas terbaik tanpa logo apapun!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-images"></i>
+                            Bisa download foto/slideshow TikTok?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">DOWNLOAD</span>
+                            <p><strong>BISA!</strong> VTmu support download slideshow/foto TikTok. Cukup copy link foto/slideshow TikTok seperti biasa, dan VTmu akan mengkonversinya menjadi video.</p>
+                            <p>Semua foto dalam slideshow akan digabung jadi satu video dengan musik aslinya!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-music"></i>
+                            Bisa download audio saja (MP3)?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">DOWNLOAD</span>
+                            <p><strong>TENTU SAJA!</strong> VTmu menyediakan opsi "Audio Only (MP3)" untuk semua video.</p>
+                            <p>Pilihan ini cocok jika Anda hanya ingin mendownload musik/sound dari video tanpa gambar. File akan berformat MP3 dengan kualitas 192kbps.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quality Questions -->
+                <div class="faq-item" id="quality">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-star"></i>
+                            Kualitas apa saja yang tersedia?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">KUALITAS</span>
+                            <p>VTmu menyediakan berbagai pilihan kualitas:</p>
+                            <ul>
+                                <li><strong>Best Quality</strong> - Kualitas terbaik available (bisa 1080p, 2K, atau 4K)</li>
+                                <li><strong>HD 720p</strong> - High Definition, balance antara kualitas & ukuran file</li>
+                                <li><strong>SD 480p</strong> - Standard Definition, hemat kuota</li>
+                                <li><strong>Low 360p</strong> - Kualitas rendah, ukuran file paling kecil</li>
+                                <li><strong>Audio Only (MP3)</strong> - Hanya audio tanpa video</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-hdd"></i>
+                            Berapa ukuran file video?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">KUALITAS</span>
+                            <p>Ukuran file tergantung pada <strong>durasi video</strong> dan <strong>kualitas</strong> yang dipilih:</p>
+                            <ul>
+                                <li>360p: ~5-10 MB per menit</li>
+                                <li>480p: ~10-20 MB per menit</li>
+                                <li>720p: ~20-40 MB per menit</li>
+                                <li>1080p/Best: ~40-80 MB per menit</li>
+                                <li>Audio MP3: ~2-3 MB per menit</li>
+                            </ul>
+                            <p>Estimasi ini bisa berbeda tergantung jenis konten video.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Questions -->
+                <div class="faq-item" id="technical">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-mobile-alt"></i>
+                            Apakah bisa di HP?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">TEKNIS</span>
+                            <p><strong>BISA!</strong> VTmu 100% responsive dan bisa digunakan di semua device:</p>
+                            <ul>
+                                <li>📱 <strong>Smartphone</strong> (Android & iOS)</li>
+                                <li>📲 <strong>Tablet</strong> (iPad, Android Tablet)</li>
+                                <li>💻 <strong>Laptop & PC</strong> (Windows, Mac, Linux)</li>
+                            </ul>
+                            <p>Interface akan otomatis menyesuaikan dengan ukuran layar Anda!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Kenapa download gagal?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">TEKNIS</span>
+                            <p>Download bisa gagal karena beberapa alasan:</p>
+                            <ul>
+                                <li><strong>Video private</strong> - Video yang di-private tidak bisa didownload</li>
+                                <li><strong>Link salah</strong> - Pastikan link video benar dan lengkap</li>
+                                <li><strong>Koneksi internet</strong> - Pastikan internet stabil</li>
+                                <li><strong>Video dihapus</strong> - Video yang sudah dihapus tidak bisa diakses</li>
+                            </ul>
+                            <p>Jika masih error, coba refresh halaman dan download ulang.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-lock"></i>
+                            Apakah aman untuk download?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">TEKNIS</span>
+                            <p><strong>100% AMAN!</strong> VTmu tidak menyimpan video atau data pribadi Anda.</p>
+                            <p>Kami hanya mengambil video dari server asli platform (TikTok, YouTube, dll) dan memberikannya ke Anda. Tidak ada virus, malware, atau tracking.</p>
+                            <p>Video yang didownload langsung ke device Anda, tidak melalui server kami.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-infinity"></i>
+                            Ada batasan download?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">TEKNIS</span>
+                            <p><strong>TIDAK ADA BATASAN!</strong> Download sebanyak yang Anda mau, kapan saja, tanpa limit.</p>
+                            <p>VTmu tidak membatasi jumlah download per hari atau per user. Bebas dan unlimited!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>
+                            <i class="fas fa-question"></i>
+                            Masih ada pertanyaan lain?
+                        </h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="category-tag">SUPPORT</span>
+                            <p>Jika Anda memiliki pertanyaan lain yang tidak terjawab di sini, silakan hubungi developer:</p>
+                            <p style="margin-top: 15px;">
+                                <a href="https://wa.me/6283874636450" target="_blank"
+                                   style="display: inline-flex; align-items: center; gap: 10px;
+                                          padding: 12px 20px; background: linear-gradient(135deg, #25D366, #128C7E);
+                                          color: white; text-decoration: none; border-radius: 10px;
+                                          font-weight: 700; transition: all 0.3s;">
+                                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                                    <span>Hubungi Andri1404</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Home -->
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="/" class="btn btn-primary" style="text-decoration: none;">
+                <i class="fas fa-home"></i>
+                <span>Kembali ke Beranda</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 <strong>VTmu</strong> - Video TikTok Downloader Multiplatform</p>
+        <p class="footer-tagline">Fast, Free, No Watermark</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">
+            Developed by <a href="https://wa.me/6283874636450" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 700;">Andri1404</a>
+        </p>
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+
+            // Close all other items
+            allItems.forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Toggle current item
+            faqItem.classList.toggle('active');
+        }
+
+        function scrollToCategory(category) {
+            const element = document.getElementById(category);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Auto open the first item of that category
+                setTimeout(() => {
+                    if (!element.classList.contains('active')) {
+                        element.querySelector('.faq-question').click();
+                    }
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>
